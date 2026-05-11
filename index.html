@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nick Lobanov — Sound Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="#" class="nav-logo">NICK LOBANOV</a>
+    <div class="nav-links">
+      <a href="#works">works</a>
+      <a href="#about">about</a>
+      <a href="#contacts">contacts</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-label">// sound engineer</p>
+    <h1 class="hero-name">NICK<br>LOBANOV</h1>
+    <p class="hero-sub">mixing_&nbsp;&nbsp;mastering_&nbsp;&nbsp;arrangements_</p>
+  </section>
+
+  <section class="services">
+    <div class="services-grid">
+      <div class="service-item">
+        <span class="service-num">01</span>
+        <h3>Сведение</h3>
+        <p>Баланс, глубина и характер. Каждый элемент на своём месте — от суббаса до воздуха.</p>
+      </div>
+      <div class="service-item">
+        <span class="service-num">02</span>
+        <h3>Мастеринг</h3>
+        <p>Финальная обработка под стриминги, vinyl и CD. Громко, чисто, без потерь.</p>
+      </div>
+      <div class="service-item">
+        <span class="service-num">03</span>
+        <h3>Аранжировки</h3>
+        <p>От голоса и гитары до полноценного звукового полотна. Любой жанр.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="works" id="works">
+    <div class="works-header">
+      <p class="section-label">// works</p>
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-filter="all">all</button>
+        <button class="filter-btn" data-filter="mixing">mixing</button>
+        <button class="filter-btn" data-filter="mastering">mastering</button>
+        <button class="filter-btn" data-filter="arrangements">arrangements</button>
+      </div>
+    </div>
+    <div class="works-grid" id="works-grid">
+      <div class="loading">загружаем работы...</div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <p class="section-label">// about</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Занимаюсь сведением, мастерингом и аранжировками уже более N лет. Работал с артистами разных жанров — от инди-рока до электронной музыки.</p>
+        <p>Каждый проект — это диалог. Я слышу не только то, что записано, но и то, что имелось в виду.</p>
+        <a href="cv.pdf" class="cv-link" download>скачать cv →</a>
+      </div>
+      <div class="about-credits">
+        <p class="credits-label">// credits</p>
+        <ul>
+          <li>The Neopolitans — I Am Falling</li>
+          <li>Сансара — Мы все уйдём по одному</li>
+          <li>Исполнитель — Название трека</li>
+          <li>Исполнитель — Название трека</li>
+          <li>Исполнитель — Название трека</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="contacts" id="contacts">
+    <p class="section-label">// contacts</p>
+    <a href="mailto:postykish@gmail.com" class="contact-email">postykish@gmail.com</a>
+    <div class="contact-links">
+      <a href="https://t.me/nick_lobanov" target="_blank">tg: @nick_lobanov</a>
+      <a href="https://instagram.com/nick_lobanov" target="_blank">ig: @nick_lobanov</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2025 Nick Lobanov</span>
+  </footer>
+
+  <div id="modal" class="modal" style="display:none;">
+    <div class="modal-backdrop" onclick="closeModal()"></div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <p class="modal-artist" id="modal-artist"></p>
+          <p class="modal-title" id="modal-title"></p>
+        </div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-players" id="modal-players"></div>
+      <div class="modal-tags" id="modal-tags"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

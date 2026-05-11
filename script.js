@@ -79,6 +79,15 @@ async function loadFromSheets() {
   }
 }
 
+function extractSpotify(url) {
+  if (!url) return { id: '', type: '' };
+  const tm = String(url).match(/track\/([a-zA-Z0-9]+)/);
+  if (tm) return { id: tm[1], type: 'track' };
+  const am = String(url).match(/album\/([a-zA-Z0-9]+)/);
+  if (am) return { id: am[1], type: 'album' };
+  return { id: '', type: '' };
+}
+
 function extractSpotifyId(url) {
   if (!url) return '';
   const m = url.match(/track\/([a-zA-Z0-9]+)/);

@@ -10,7 +10,7 @@ const DEMO_TRACKS = [
   {
     spotify_id: '6ut2JQPHZs91okyzdgECbE', spotify_type: 'track',
     yandex_url: 'https://music.yandex.ru/album/39927982/track/146597127',
-    tags: ['mixing', 'mastering', 'arrangements'],
+    tags: ['mixing', 'mastering', 'production'],
     title: '', artist: '', cover_url: ''
   },
   {
@@ -39,22 +39,19 @@ document.querySelectorAll('.service-item').forEach(el => observer.observe(el));
 
 // ─── GOOGLE SHEETS ────────────────────────────────────────────────────────────
 async function loadFromSheets() {
-  if (SHEET_ID === '1LuasUcthP8BrWx085vm3-hzOUJNWbInKogwMtf_W0cw') {
-    allTracks = DEMO_TRACKS;
-    await enrichWithSpotify(allTracks);
-    renderTracks(allTracks);
-    return;
-  }
-
   try {
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}&headers=0`;
     const res = await fetch(url);
     const text = await res.text();
     const json = JSON.parse(text.slice(47, -2));
     const rows = json.table.rows;
-    const cols = json.table.cols.map(c => c.label.toLowerCase().trim());
 
-    allTracks = rows.map(row => {
+    // Берём заголовки из первой строки таблицы
+    const headerRow = rows[0];
+    const cols = headerRow.c.map(c => c && c.v ? String(c.v).toLowerCase().trim() : '');
+    const dataRows = rows.slice(1);
+
+    allTracks = dataRows.map(row => {
       const get = (key) => {
         const i = cols.indexOf(key);
         return i >= 0 && row.c[i] ? row.c[i].v || '' : '';

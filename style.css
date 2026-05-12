@@ -60,7 +60,7 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
 
 /* SERVICES */
 .services { border-top: 1px solid var(--border); }
-.services-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; border-left: 1px solid var(--border); }
+.services-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; border-left: 1px solid var(--border); }
 .service-item {
   padding: 36px 32px;
   border-right: 1px solid var(--border);
@@ -220,6 +220,10 @@ footer {
 footer span { color: var(--dim); font-size: 10px; }
 
 /* RESPONSIVE */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: 1fr 1fr; }
+}
+
 @media (max-width: 768px) {
   nav { padding: 16px 20px; }
   .nav-links { gap: 16px; }

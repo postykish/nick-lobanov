@@ -208,12 +208,12 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
   overflow-y: auto;
 }
 .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
-.modal-artist { color: var(--dim); font-size: 10px; letter-spacing: 1px; margin-bottom: 6px; }
+.modal-artist { color: #b8b8b8; font-size: 11px; letter-spacing: 1px; margin-bottom: 6px; }
 .modal-title { font-size: 18px; font-weight: 400; color: var(--fg); }
 .modal-close { background: none; border: none; color: var(--muted); font-size: 16px; cursor: pointer; font-family: var(--font); padding: 0; }
 .modal-close:hover { color: var(--fg); }
 .modal-players { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
-.player-label { color: var(--dim); font-size: 9px; letter-spacing: 2px; margin-bottom: 6px; }
+.player-label { color: #888; font-size: 9px; letter-spacing: 2px; margin-bottom: 6px; }
 .modal-tags { display: flex; gap: 6px; flex-wrap: wrap; }
 
 /* ABOUT */

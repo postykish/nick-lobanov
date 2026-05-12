@@ -10,7 +10,7 @@
   --font: 'Roboto Mono', ui-monospace, monospace;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   background: var(--bg);
@@ -19,6 +19,7 @@ body {
   font-weight: 300;
   line-height: 1.6;
   overflow-x: hidden;
+  width: 100%;
 }
 
 /* NAV */
@@ -57,6 +58,7 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
   margin-bottom: 28px;
 }
 .hero-sub { color: var(--accent); font-size: 11px; letter-spacing: 3px; }
+.hero-sub span { display: inline-block; margin-right: 20px; white-space: nowrap; }
 
 /* SERVICES */
 .services { border-top: 1px solid var(--border); }
@@ -262,12 +264,42 @@ footer span { color: var(--dim); font-size: 10px; }
 @media (max-width: 768px) {
   nav { padding: 16px 20px; }
   .nav-links { gap: 16px; }
-  .hero { padding: 0 20px 48px; }
+  .nav-logo { font-size: 11px; letter-spacing: 1.5px; }
+
+  .hero {
+    padding: 0 20px 48px;
+    min-height: 90vh;
+  }
+  .hero-name {
+    font-size: clamp(56px, 16vw, 88px);
+    letter-spacing: -1px;
+    word-break: break-word;
+  }
+  .hero-sub {
+    font-size: 10px;
+    letter-spacing: 2px;
+    line-height: 2;
+  }
+
   .services-grid { grid-template-columns: 1fr; }
   .works { padding: 48px 20px; }
+  .works-grid { grid-template-columns: 1fr 1fr; }
+
   .about { padding: 48px 20px; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
+
   .contacts { padding: 48px 20px; }
+  .contact-email {
+    font-size: 18px;
+    word-break: break-all;
+  }
+  .contact-links { flex-direction: column; gap: 12px; }
+
   footer { padding: 20px; }
   .modal-box { padding: 24px; }
+}
+
+@media (max-width: 420px) {
+  .works-grid { grid-template-columns: 1fr; }
+  .track-card { padding: 22px; }
 }

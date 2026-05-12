@@ -59,8 +59,8 @@ async function loadFromSheets() {
       const tagsRaw = get('tags');
       const spotifyUrl = get('spotify_url');
       return {
-        title: '',
-        artist: '',
+        title: get('title'),
+        artist: get('artist'),
         cover_url: '',
         tags: tagsRaw ? tagsRaw.split(',').map(t => t.trim().toLowerCase()) : [],
         yandex_url: get('yandex_url'),

@@ -240,25 +240,24 @@ function getCurrentColumns() {
   return 4;
 }
 
-// Убирает правые/нижние границы у крайних карточек чтобы не висели в пустоте
+// Добавляет невидимые заглушки в конец сетки, чтобы последний ряд был полным
 function updateRowBorders() {
-  const visible = [...document.querySelectorAll('.track-card:not(.hidden)')];
-  visible.forEach(card => {
-    card.classList.remove('last-in-row', 'last-row');
-  });
+  const grid = document.getElementById('works-grid');
+  // Убираем старые заглушки
+  grid.querySelectorAll('.track-filler').forEach(el => el.remove());
+
+  const visible = grid.querySelectorAll('.track-card:not(.hidden)').length;
+  if (!visible) return;
 
   const cols = getCurrentColumns();
-  // Каждая n-я карточка справа в ряду
-  for (let i = cols - 1; i < visible.length; i += cols) {
-    visible[i].classList.add('last-in-row');
-  }
-  // Последняя карточка тоже без правой границы
-  if (visible.length) visible[visible.length - 1].classList.add('last-in-row');
+  const remainder = visible % cols;
+  if (remainder === 0) return;
 
-  // Карточки в последнем ряду без нижней границы
-  const lastRowStart = Math.floor((visible.length - 1) / cols) * cols;
-  for (let i = lastRowStart; i < visible.length; i++) {
-    visible[i].classList.add('last-row');
+  const fillersNeeded = cols - remainder;
+  for (let i = 0; i < fillersNeeded; i++) {
+    const filler = document.createElement('div');
+    filler.className = 'track-filler';
+    grid.appendChild(filler);
   }
 }
 

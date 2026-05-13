@@ -13,7 +13,16 @@
   <nav id="nav">
     <a href="#" class="nav-logo">NICK LOBANOV</a>
     <div class="nav-links">
-      <a href="#works">works</a>
+      <div class="nav-dropdown">
+        <a href="#works" class="nav-trigger">works</a>
+        <div class="dropdown-menu">
+          <a href="#works" data-filter="all">all</a>
+          <a href="#works" data-filter="mixing">mixing</a>
+          <a href="#works" data-filter="mastering">mastering</a>
+          <a href="#works" data-filter="production">production</a>
+          <a href="#works" data-filter="collaboration">collaboration</a>
+        </div>
+      </div>
       <a href="#about">about</a>
       <a href="#contacts">contacts</a>
     </div>
@@ -68,6 +77,9 @@
     </div>
     <div class="works-grid" id="works-grid">
       <div class="loading">загружаем работы...</div>
+    </div>
+    <div class="load-more-wrap">
+      <button class="load-more" id="load-more" style="display:none;">показать ещё</button>
     </div>
   </section>
 

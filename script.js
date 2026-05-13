@@ -30,6 +30,24 @@ window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
 });
 
+// ─── DROPDOWN (тап на мобиле / hover на десктопе) ─────────────────────────────
+const dropdown = document.querySelector('.nav-dropdown');
+const trigger = document.querySelector('.nav-trigger');
+trigger.addEventListener('click', (e) => {
+  if (window.innerWidth <= 768) {
+    e.preventDefault();
+    dropdown.classList.toggle('open');
+  }
+});
+// Закрываем при клике вне dropdown
+document.addEventListener('click', (e) => {
+  if (!dropdown.contains(e.target)) dropdown.classList.remove('open');
+});
+// Закрываем после выбора фильтра
+document.querySelectorAll('.dropdown-menu a').forEach(a => {
+  a.addEventListener('click', () => dropdown.classList.remove('open'));
+});
+
 // ─── INTERSECTION OBSERVER (анимации появления) ───────────────────────────────
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -116,12 +134,17 @@ async function enrichWithSpotify(tracks) {
 }
 
 // ─── РЕНДЕР КАРТОЧЕК ──────────────────────────────────────────────────────────
+// ─── РЕНДЕР + ПАГИНАЦИЯ ───────────────────────────────────────────────────────
+const PAGE_SIZE = 6;
+let visibleCount = PAGE_SIZE;
+
 function renderTracks(tracks) {
   const grid = document.getElementById('works-grid');
   grid.innerHTML = '';
 
   if (!tracks.length) {
     grid.innerHTML = '<div class="loading">работы скоро появятся...</div>';
+    document.getElementById('load-more').style.display = 'none';
     return;
   }
 
@@ -146,11 +169,7 @@ function renderTracks(tracks) {
 
     card.addEventListener('click', () => openModal(track));
     grid.appendChild(card);
-
-    setTimeout(() => {
-      observer.observe(card);
-      setTimeout(() => card.classList.add('visible'), i * 80);
-    }, 0);
+    setTimeout(() => card.classList.add('visible'), i * 60);
   });
 
   applyFilter(currentFilter);
@@ -159,19 +178,61 @@ function renderTracks(tracks) {
 // ─── ФИЛЬТРАЦИЯ ───────────────────────────────────────────────────────────────
 document.getElementById('filters').addEventListener('click', (e) => {
   if (!e.target.classList.contains('filter-btn')) return;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  e.target.classList.add('active');
-  currentFilter = e.target.dataset.filter;
-  applyFilter(currentFilter);
+  setFilter(e.target.dataset.filter);
 });
 
-function applyFilter(filter) {
-  document.querySelectorAll('.track-card').forEach(card => {
-    const tags = card.dataset.tags.split(',');
-    const show = filter === 'all' || tags.includes(filter);
-    card.classList.toggle('hidden', !show);
+// Связь с dropdown в шапке
+document.querySelectorAll('.dropdown-menu a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    setFilter(a.dataset.filter);
+    // dropdown сам закроется
   });
+});
+
+function setFilter(filter) {
+  currentFilter = filter;
+  visibleCount = PAGE_SIZE;
+
+  // Подсветка кнопки-фильтра
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.filter === filter);
+  });
+  // Подсветка пункта в dropdown
+  document.querySelectorAll('.dropdown-menu a').forEach(a => {
+    a.classList.toggle('current', a.dataset.filter === filter);
+  });
+
+  applyFilter(filter);
 }
+
+function applyFilter(filter) {
+  const cards = [...document.querySelectorAll('.track-card')];
+  let shown = 0;
+
+  cards.forEach(card => {
+    const tags = card.dataset.tags.split(',');
+    const matches = filter === 'all' || tags.includes(filter);
+    if (matches && shown < visibleCount) {
+      card.classList.remove('hidden');
+      shown++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  const totalMatching = cards.filter(card => {
+    const tags = card.dataset.tags.split(',');
+    return filter === 'all' || tags.includes(filter);
+  }).length;
+
+  const loadMoreBtn = document.getElementById('load-more');
+  loadMoreBtn.style.display = totalMatching > visibleCount ? 'inline-block' : 'none';
+}
+
+document.getElementById('load-more').addEventListener('click', () => {
+  visibleCount += PAGE_SIZE;
+  applyFilter(currentFilter);
+});
 
 // ─── МОДАЛЬНОЕ ОКНО ───────────────────────────────────────────────────────────
 function openModal(track) {

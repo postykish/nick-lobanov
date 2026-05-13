@@ -286,7 +286,7 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
 /* CONTACTS */
 .contacts { padding: 64px 40px; border-top: 1px solid var(--border); }
 .contacts .section-label { margin-bottom: 24px; }
-.contact-email {
+.contact-main {
   display: block;
   font-size: clamp(18px, 3vw, 32px);
   font-weight: 300;
@@ -296,7 +296,7 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
   transition: color 0.2s;
   letter-spacing: -0.5px;
 }
-.contact-email:hover { color: var(--accent); }
+.contact-main:hover { color: var(--accent); }
 .contact-links { display: flex; gap: 28px; }
 .contact-links a { color: var(--muted); font-size: 12px; text-decoration: none; transition: color 0.2s; }
 .contact-links a:hover { color: var(--fg); }
@@ -346,7 +346,7 @@ footer span { color: var(--dim); font-size: 10px; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
 
   .contacts { padding: 48px 20px; }
-  .contact-email {
+  .contact-main {
     font-size: 18px;
     word-break: break-all;
   }

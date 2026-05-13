@@ -164,7 +164,8 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
   transform: translateY(12px);
   transition: opacity 0.4s, transform 0.4s, background 0.2s;
 }
-.track-card:nth-child(4n) { border-right: none; }
+.track-card.last-in-row { border-right: none; }
+.track-card.last-row { border-bottom: none; }
 .track-card.visible { opacity: 1; transform: none; }
 .track-card:hover { background: #111; }
 .track-card.hidden { display: none; }
@@ -312,8 +313,6 @@ footer span { color: var(--dim); font-size: 10px; }
 @media (max-width: 1024px) {
   .services-grid { grid-template-columns: 1fr 1fr; }
   .works-grid { grid-template-columns: repeat(3, 1fr); }
-  .track-card:nth-child(4n) { border-right: 1px solid var(--border); }
-  .track-card:nth-child(3n) { border-right: none; }
 }
 
 @media (max-width: 768px) {
@@ -342,8 +341,6 @@ footer span { color: var(--dim); font-size: 10px; }
   .track-card { padding: 18px; }
   .track-title { font-size: 13px; min-height: 34px; }
   .track-artist { font-size: 10px; }
-  .track-card:nth-child(3n) { border-right: 1px solid var(--border); }
-  .track-card:nth-child(2n) { border-right: none; }
 
   .about { padding: 48px 20px; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }

@@ -146,12 +146,11 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
 
 .works-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  grid-template-columns: repeat(4, 1fr);
+  background: transparent;
+  border: none;
 }
-.loading { background: var(--bg); padding: 48px; color: var(--muted); font-size: 11px; }
+.loading { background: var(--bg); padding: 48px; color: var(--muted); font-size: 11px; grid-column: 1 / -1; }
 
 .track-card {
   background: var(--bg);
@@ -159,10 +158,13 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.4s, transform 0.4s, background 0.2s;
 }
+.track-card:nth-child(4n) { border-right: none; }
 .track-card.visible { opacity: 1; transform: none; }
 .track-card:hover { background: #111; }
 .track-card.hidden { display: none; }
@@ -309,6 +311,9 @@ footer span { color: var(--dim); font-size: 10px; }
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .services-grid { grid-template-columns: 1fr 1fr; }
+  .works-grid { grid-template-columns: repeat(3, 1fr); }
+  .track-card:nth-child(4n) { border-right: 1px solid var(--border); }
+  .track-card:nth-child(3n) { border-right: none; }
 }
 
 @media (max-width: 768px) {
@@ -334,6 +339,11 @@ footer span { color: var(--dim); font-size: 10px; }
   .services-grid { grid-template-columns: 1fr; }
   .works { padding: 48px 20px; }
   .works-grid { grid-template-columns: 1fr 1fr; }
+  .track-card { padding: 18px; }
+  .track-title { font-size: 13px; min-height: 34px; }
+  .track-artist { font-size: 10px; }
+  .track-card:nth-child(3n) { border-right: 1px solid var(--border); }
+  .track-card:nth-child(2n) { border-right: none; }
 
   .about { padding: 48px 20px; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -349,7 +359,7 @@ footer span { color: var(--dim); font-size: 10px; }
   .modal-box { padding: 24px; }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 360px) {
   .works-grid { grid-template-columns: 1fr; }
-  .track-card { padding: 22px; }
+  .track-card { padding: 22px; border-right: none !important; }
 }

@@ -135,7 +135,7 @@ async function enrichWithSpotify(tracks) {
 
 // ─── РЕНДЕР КАРТОЧЕК ──────────────────────────────────────────────────────────
 // ─── РЕНДЕР + ПАГИНАЦИЯ ───────────────────────────────────────────────────────
-const PAGE_SIZE = 6;
+const PAGE_SIZE = window.innerWidth > 768 ? 8 : 6;
 let visibleCount = PAGE_SIZE;
 
 function renderTracks(tracks) {
@@ -154,7 +154,7 @@ function renderTracks(tracks) {
     card.dataset.tags = track.tags.join(',');
 
     const coverHTML = track.cover_url
-      ? `<img class="track-cover" src="${track.cover_url}" alt="${track.title}" loading="lazy">`
+      ? `<img class="track-cover" src="${track.cover_url}" alt="${track.title}">`
       : `<div class="track-cover-placeholder">no cover</div>`;
 
     const tagsHTML = track.tags.map(t => `<span class="tag">#${t}</span>`).join('');
@@ -227,7 +227,44 @@ function applyFilter(filter) {
 
   const loadMoreBtn = document.getElementById('load-more');
   loadMoreBtn.style.display = totalMatching > visibleCount ? 'inline-block' : 'none';
+
+  updateRowBorders();
 }
+
+// Считает сколько колонок сейчас
+function getCurrentColumns() {
+  const w = window.innerWidth;
+  if (w <= 360) return 1;
+  if (w <= 768) return 2;
+  if (w <= 1024) return 3;
+  return 4;
+}
+
+// Убирает правые/нижние границы у крайних карточек чтобы не висели в пустоте
+function updateRowBorders() {
+  const visible = [...document.querySelectorAll('.track-card:not(.hidden)')];
+  visible.forEach(card => {
+    card.classList.remove('last-in-row', 'last-row');
+  });
+
+  const cols = getCurrentColumns();
+  // Каждая n-я карточка справа в ряду
+  for (let i = cols - 1; i < visible.length; i += cols) {
+    visible[i].classList.add('last-in-row');
+  }
+  // Последняя карточка тоже без правой границы
+  if (visible.length) visible[visible.length - 1].classList.add('last-in-row');
+
+  // Карточки в последнем ряду без нижней границы
+  const lastRowStart = Math.floor((visible.length - 1) / cols) * cols;
+  for (let i = lastRowStart; i < visible.length; i++) {
+    visible[i].classList.add('last-row');
+  }
+}
+
+window.addEventListener('resize', () => {
+  updateRowBorders();
+});
 
 document.getElementById('load-more').addEventListener('click', () => {
   visibleCount += PAGE_SIZE;

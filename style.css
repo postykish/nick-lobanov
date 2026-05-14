@@ -273,7 +273,7 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
 
 /* ABOUT */
 .about { padding: 64px 40px; border-top: 1px solid var(--border); }
-.about .section-label { margin-bottom: 40px; }
+.about .section-label { color: #b8b8b8; margin-bottom: 20px; }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
 .about-text p { color: #b8b8b8; font-size: 12px; line-height: 1.8; margin-bottom: 20px; }
 .about-text .inline-link {

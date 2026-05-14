@@ -80,7 +80,7 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
 .load-more {
   background: none;
   border: 1px solid var(--border);
-  color: var(--muted);
+  color: #b8b8b8;
   font-family: var(--font);
   font-size: 11px;
   letter-spacing: 2px;
@@ -275,7 +275,7 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
 .about { padding: 64px 40px; border-top: 1px solid var(--border); }
 .about .section-label { margin-bottom: 40px; }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
-.about-text p { color: var(--muted); font-size: 12px; line-height: 1.8; margin-bottom: 20px; }
+.about-text p { color: #b8b8b8; font-size: 12px; line-height: 1.8; margin-bottom: 20px; }
 .about-text .inline-link {
   color: var(--accent);
   text-decoration: none;
@@ -288,9 +288,9 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
 }
 .cv-link { color: var(--accent); font-size: 11px; text-decoration: none; letter-spacing: 1px; transition: opacity 0.2s; }
 .cv-link:hover { opacity: 0.7; }
-.credits-label { color: var(--dim); font-size: 10px; letter-spacing: 2px; margin-bottom: 20px; }
+.credits-label { color: #b8b8b8; font-size: 10px; letter-spacing: 2px; margin-bottom: 20px; }
 .about-credits ul { list-style: none; }
-.about-credits li { color: var(--muted); font-size: 11px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.about-credits li { color: #b8b8b8; font-size: 11px; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .about-credits li:first-child { border-top: 1px solid var(--border); }
 
 /* CONTACTS */

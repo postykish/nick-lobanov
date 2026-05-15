@@ -283,7 +283,8 @@ function openModal(track) {
   if (track.yandex_url) {
     const albumMatch = track.yandex_url.match(/album\/(\d+)\/track\/(\d+)/);
     if (albumMatch) {
-      const iframeSrc = `https://music.yandex.ru/iframe/album/${albumMatch[1]}/track/${albumMatch[2]}`;
+      // Хэш-формат iframe — стабильнее на мобильных
+      const iframeSrc = `https://music.yandex.ru/iframe/#track/${albumMatch[2]}/${albumMatch[1]}`;
       playersDiv.innerHTML += `
         <div>
           <p class="player-label">// яндекс музыка</p>

@@ -79,7 +79,7 @@ async function loadFromSheets() {
       return {
         title: get('title'),
         artist: get('artist'),
-        cover_url: '',
+        cover_url: get('cover_url'),
         tags: tagsRaw ? tagsRaw.split(',').map(t => t.trim().toLowerCase()) : [],
         yandex_url: get('yandex_url'),
         spotify_id: extractSpotify(spotifyUrl).id,
@@ -122,7 +122,7 @@ async function enrichWithSpotify(tracks) {
       const res = await fetch(url);
       const data = await res.json();
       // Обложка
-      if (data.thumbnail_url) track.cover_url = data.thumbnail_url;
+      if (data.thumbnail_url && !track.cover_url) track.cover_url = data.thumbnail_url;
       // Название и исполнитель из поля title вида "Song Name by Artist Name"
       if (data.title) {
         const parts = data.title.split(' by ');

@@ -281,6 +281,9 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
   align-items: start;
   margin-bottom: 64px;
 }
+.about-photo {
+  max-width: 320px;
+}
 .about-photo img {
   width: 100%;
   aspect-ratio: 4 / 5;

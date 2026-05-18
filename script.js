@@ -153,8 +153,15 @@ function renderTracks(tracks) {
     card.className = 'track-card';
     card.dataset.tags = track.tags.join(',');
 
-    const coverHTML = track.cover_url
-      ? `<img class="track-cover" src="${track.cover_url}" alt="${track.title}">`
+    // Уменьшаем размер обложки с Яндекса (m1000x1000 → m400x400) - быстрее грузится
+    let coverUrl = track.cover_url || '';
+    if (coverUrl.includes('avatars.yandex.net') && coverUrl.includes('m1000x1000')) {
+      coverUrl = coverUrl.replace('m1000x1000', 'm400x400');
+    }
+    // Первые 8 карточек грузим сразу (видны на экране), остальные лениво
+    const loadingAttr = i < 8 ? 'eager' : 'lazy';
+    const coverHTML = coverUrl
+      ? `<img class="track-cover" src="${coverUrl}" alt="${track.title}" loading="${loadingAttr}" decoding="async">`
       : `<div class="track-cover-placeholder">no cover</div>`;
 
     const tagsHTML = track.tags.map(t => `<span class="tag">#${t}</span>`).join('');

@@ -24,6 +24,37 @@ const DEMO_TRACKS = [
 let allTracks = [];
 let currentFilter = 'all';
 let activeIframes = [];
+let currentLang = localStorage.getItem('lang') || 'ru';
+
+// ─── ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА RU/EN ────────────────────────────────────────────────
+function applyLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+
+  // Тексты с data-ru / data-en (заголовки услуг, описания, кнопки)
+  document.querySelectorAll('[data-ru][data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (val !== null) el.textContent = val;
+  });
+
+  // Блоки целиком с переключаемой версткой (about-текст)
+  document.querySelectorAll('[data-lang-block]').forEach(el => {
+    el.style.display = el.getAttribute('data-lang-block') === lang ? '' : 'none';
+  });
+
+  // Подсветка активной кнопки в шапке
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+
+// Применяем сохранённый язык при загрузке
+applyLang(currentLang);
 
 // ─── NAV SCROLL ───────────────────────────────────────────────────────────────
 window.addEventListener('scroll', () => {

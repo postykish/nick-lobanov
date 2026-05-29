@@ -40,6 +40,30 @@ nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--b
 .nav-links a { color: var(--muted); text-decoration: none; font-size: 11px; letter-spacing: 1px; transition: color 0.2s; }
 .nav-links a:hover { color: var(--fg); }
 
+/* LANG SWITCH */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  padding-left: 18px;
+  border-left: 1px solid var(--border);
+}
+.lang-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: var(--font);
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+.lang-btn:hover { color: var(--fg); }
+.lang-btn.active { color: var(--fg); }
+.lang-divider { color: var(--muted); font-size: 11px; }
+
 /* DROPDOWN */
 .nav-dropdown { position: relative; }
 .nav-trigger { color: var(--muted); text-decoration: none; font-size: 11px; letter-spacing: 1px; cursor: pointer; transition: color 0.2s; }
@@ -354,6 +378,7 @@ footer span { color: var(--dim); font-size: 10px; }
   nav { padding: 16px 20px; }
   .nav-links { gap: 16px; }
   .nav-logo { font-size: 11px; letter-spacing: 1.5px; }
+  .lang-switch { margin-left: 0; padding-left: 10px; }
 
   .hero {
     padding: 0 20px 48px;

@@ -1,423 +1,259 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-:root {
-  --bg: #0b0b0b;
-  --fg: #f0f0f0;
-  --muted: #383838;
-  --dim: #222;
-  --accent: #5a8fa8;
-  --border: #1a1a1a;
-  --font: 'Roboto Mono', ui-monospace, monospace;
-}
+  <!-- Primary Meta -->
+  <title>Nick Lobanov — звукорежиссёр, сведение и мастеринг в Москве</title>
+  <meta name="description" content="Nick Lobanov — микс-инженер и продюсер, официальный мастеринг-инженер Apple Digital Masters. Сведение, мастеринг, продакшн. Москва, клиенты по всему миру.">
+  <meta name="keywords" content="Nick Lobanov, Ник Лобанов, Николай Лобанов, Apple Digital Masters, Apple Digital Masters mastering engineer, Apple Digital Masters approved mastering engineer, мастеринг Apple Digital Masters, звукорежиссёр, микс-инженер, mixing engineer, mastering engineer, сведение, мастеринг, продюсирование, продакшн, музыкальный продюсер, сведение и мастеринг Москва, звукорежиссёр Москва, mixing mastering Moscow">
+  <meta name="author" content="Nick Lobanov">
+  <link rel="canonical" href="https://nicklobanov.pro/">
 
-html { scroll-behavior: smooth; overflow-x: hidden; }
+  <!-- Open Graph / Facebook / Telegram / VK -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nicklobanov.pro/">
+  <meta property="og:title" content="Nick Lobanov — звукорежиссёр, сведение и мастеринг">
+  <meta property="og:description" content="Nick Lobanov — микс-инженер и продюсер, официальный мастеринг-инженер Apple Digital Masters. Сведение, мастеринг, продакшн. Москва, клиенты по всему миру.">
+  <meta property="og:image" content="https://nicklobanov.pro/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="Nick Lobanov">
 
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font);
-  font-weight: 300;
-  line-height: 1.6;
-  overflow-x: hidden;
-  width: 100%;
-}
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nick Lobanov — звукорежиссёр, сведение и мастеринг">
+  <meta name="twitter:description" content="Микс-инженер и продюсер, официальный мастеринг-инженер Apple Digital Masters. Сведение, мастеринг, продакшн. Москва, клиенты по всему миру.">
+  <meta name="twitter:image" content="https://nicklobanov.pro/og-image.jpg">
 
-/* NAV */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 40px;
-  background: transparent;
-  transition: background 0.3s;
-}
-nav.scrolled { background: rgba(11,11,11,0.95); border-bottom: 1px solid var(--border); }
-.nav-logo { font-size: 13px; font-weight: 500; letter-spacing: 2px; color: var(--fg); text-decoration: none; }
-.nav-links { display: flex; gap: 28px; align-items: center; }
-.nav-links a { color: var(--muted); text-decoration: none; font-size: 11px; letter-spacing: 1px; transition: color 0.2s; }
-.nav-links a:hover { color: var(--fg); }
-
-/* LANG SWITCH */
-.lang-switch {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-left: 8px;
-  padding-left: 18px;
-  border-left: 1px solid var(--border);
-}
-.lang-btn {
-  background: none;
-  border: none;
-  color: var(--muted);
-  font-family: var(--font);
-  font-size: 11px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  padding: 0;
-  transition: color 0.2s;
-}
-.lang-btn:hover { color: var(--fg); }
-.lang-btn.active { color: var(--fg); }
-.lang-divider { color: var(--muted); font-size: 11px; }
-
-/* DROPDOWN */
-.nav-dropdown { position: relative; }
-.nav-trigger { color: var(--muted); text-decoration: none; font-size: 11px; letter-spacing: 1px; cursor: pointer; transition: color 0.2s; }
-.nav-trigger:hover, .nav-dropdown.open .nav-trigger { color: var(--fg); }
-.dropdown-menu {
-  position: absolute;
-  top: calc(100% + 12px);
-  left: 0;
-  background: #0f0f0f;
-  border: 1px solid var(--border);
-  padding: 8px 0;
-  min-width: 160px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-4px);
-  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
-}
-.nav-dropdown:hover .dropdown-menu,
-.nav-dropdown.open .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: none;
-}
-.dropdown-menu a {
-  display: block;
-  padding: 8px 18px;
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 11px;
-  letter-spacing: 1px;
-  transition: color 0.2s, background 0.2s;
-}
-.dropdown-menu a:hover { color: var(--accent); background: #141414; }
-.dropdown-menu a.current { color: var(--accent); }
-
-/* LOAD MORE */
-.load-more-wrap { display: flex; justify-content: center; margin-top: 24px; }
-.load-more {
-  background: none;
-  border: 1px solid var(--border);
-  color: #b8b8b8;
-  font-family: var(--font);
-  font-size: 11px;
-  letter-spacing: 2px;
-  padding: 12px 32px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.load-more:hover { border-color: var(--accent); color: var(--accent); }
-
-/* HERO */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 40px 64px;
-}
-.hero-label { color: var(--dim); font-size: 11px; letter-spacing: 2px; margin-bottom: 20px; }
-.hero-name {
-  font-size: clamp(72px, 13vw, 140px);
-  font-weight: 300;
-  line-height: 0.88;
-  letter-spacing: -2px;
-  color: #f5f5f5;
-  margin-bottom: 28px;
-}
-.hero-sub { color: var(--accent); font-size: 11px; letter-spacing: 3px; }
-.hero-sub span { display: inline-block; margin-right: 20px; white-space: nowrap; }
-
-/* SERVICES */
-.services { border-top: 1px solid var(--border); }
-.services-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; border-left: 1px solid var(--border); }
-.service-item {
-  padding: 36px 32px;
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s, transform 0.5s;
-}
-.service-item.visible { opacity: 1; transform: none; }
-.service-num { color: var(--dim); font-size: 10px; letter-spacing: 2px; display: block; margin-bottom: 14px; }
-.service-item h3 { font-size: 15px; font-weight: 400; margin-bottom: 12px; color: var(--fg); }
-.service-item p { color: var(--muted); font-size: 11px; line-height: 1.7; }
-
-/* WORKS */
-.works { padding: 64px 40px; }
-.works-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 32px; }
-.section-label { color: var(--dim); font-size: 10px; letter-spacing: 2px; }
-.filters { display: flex; gap: 8px; flex-wrap: wrap; }
-.filter-btn {
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  font-family: var(--font);
-  font-size: 10px;
-  letter-spacing: 1px;
-  padding: 5px 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.filter-btn:hover, .filter-btn.active { border-color: var(--accent); color: var(--accent); }
-
-.works-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-}
-.loading { background: var(--bg); padding: 48px; color: var(--muted); font-size: 11px; grid-column: 1 / -1; }
-
-.track-card {
-  background: var(--bg);
-  padding: 28px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.4s, transform 0.4s, background 0.2s;
-}
-.track-card.visible { opacity: 1; transform: none; }
-.track-card:hover { background: #111; }
-.track-card.hidden { display: none; }
-
-/* Невидимые заглушки чтобы добить последний ряд */
-.track-filler { background: var(--bg); }
-
-.track-cover {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  margin-bottom: 16px;
-  filter: grayscale(20%);
-  transition: filter 0.3s;
-  background: #141414;
-}
-.track-card:hover .track-cover { filter: grayscale(0%); }
-.track-cover-placeholder {
-  width: 100%;
-  aspect-ratio: 1;
-  background: var(--border);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--dim);
-  font-size: 10px;
-}
-
-.track-artist {
-  color: #b8b8b8;
-  font-size: 11px;
-  letter-spacing: 1px;
-  margin-bottom: 6px;
-  min-height: 14px;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.track-title {
-  font-size: 15px;
-  font-weight: 400;
-  color: var(--fg);
-  margin-bottom: 14px;
-  min-height: 38px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.track-tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-  min-height: 22px;
-  align-content: flex-start;
-}
-.tag {
-  font-size: 9px;
-  letter-spacing: 1px;
-  border: 1px solid #2a2a2a;
-  color: #888;
-  padding: 2px 8px;
-  height: fit-content;
-}
-.track-play {
-  color: var(--accent);
-  font-size: 11px;
-  margin-top: auto;
-  padding-top: 8px;
-}
-
-/* MODAL */
-.modal {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-}
-.modal-box {
-  position: relative;
-  background: #0f0f0f;
-  border: 1px solid var(--border);
-  padding: 32px;
-  width: 100%;
-  max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-.modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
-.modal-artist { color: #b8b8b8; font-size: 11px; letter-spacing: 1px; margin-bottom: 6px; }
-.modal-title { font-size: 18px; font-weight: 400; color: var(--fg); }
-.modal-close { background: none; border: none; color: var(--muted); font-size: 16px; cursor: pointer; font-family: var(--font); padding: 0; }
-.modal-close:hover { color: var(--fg); }
-.modal-players { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
-.player-label { color: #888; font-size: 9px; letter-spacing: 2px; margin-bottom: 6px; }
-.modal-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-
-/* ABOUT */
-.about { padding: 64px 40px; border-top: 1px solid var(--border); }
-.about-main {
-  display: grid;
-  grid-template-columns: minmax(280px, 1fr) 2fr;
-  gap: 56px;
-  align-items: start;
-  margin-bottom: 64px;
-}
-.about-photo img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: center 25%;
-  display: block;
-  filter: grayscale(15%);
-  transition: filter 0.3s;
-}
-.about-photo img:hover { filter: grayscale(0%); }
-.about-credits { padding-top: 32px; border-top: 1px solid var(--border); }
-.about .section-label { color: #b8b8b8; margin-bottom: 20px; }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
-.about-text p { color: #b8b8b8; font-size: 12px; line-height: 1.8; margin-bottom: 20px; }
-.about-text .inline-link {
-  color: var(--accent);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s, opacity 0.2s;
-}
-.about-text .inline-link:hover {
-  border-bottom-color: var(--accent);
-  opacity: 0.85;
-}
-.cv-link { color: var(--accent); font-size: 11px; text-decoration: none; letter-spacing: 1px; transition: opacity 0.2s; }
-.cv-link:hover { opacity: 0.7; }
-.credits-block { margin-bottom: 28px; }
-.credits-block:last-child { margin-bottom: 0; }
-.credits-label { color: #b8b8b8; font-size: 10px; letter-spacing: 2px; margin-bottom: 12px; }
-.credits-block p:not(.credits-label) {
-  color: #b8b8b8;
-  font-size: 12px;
-  line-height: 1.8;
-  margin: 0;
-}
-.about-credits li:first-child { border-top: 1px solid var(--border); }
-
-/* CONTACTS */
-.contacts { padding: 64px 40px; border-top: 1px solid var(--border); }
-.contacts .section-label { margin-bottom: 24px; }
-.contact-main {
-  display: block;
-  font-size: clamp(18px, 3vw, 32px);
-  font-weight: 300;
-  color: var(--fg);
-  text-decoration: none;
-  margin-bottom: 24px;
-  transition: color 0.2s;
-  letter-spacing: -0.5px;
-}
-.contact-main:hover { color: var(--accent); }
-.contact-links { display: flex; gap: 28px; }
-.contact-links a { color: var(--muted); font-size: 12px; text-decoration: none; transition: color 0.2s; }
-.contact-links a:hover { color: var(--fg); }
-
-footer {
-  padding: 24px 40px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: flex-end;
-}
-footer span { color: var(--dim); font-size: 10px; }
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .services-grid { grid-template-columns: 1fr 1fr; }
-  .works-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (max-width: 768px) {
-  nav { padding: 16px 20px; }
-  .nav-links { gap: 16px; }
-  .nav-logo { font-size: 11px; letter-spacing: 1.5px; }
-  .lang-switch { margin-left: 0; padding-left: 10px; }
-
-  .hero {
-    padding: 0 20px 48px;
-    min-height: 90vh;
+  <!-- Structured data: Person + Service -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nick Lobanov",
+    "alternateName": ["Ник Лобанов", "Николай Лобанов"],
+    "jobTitle": "Микс-инженер и продюсер",
+    "url": "https://nicklobanov.pro/",
+    "image": "https://nicklobanov.pro/nick.jpg",
+    "sameAs": [
+      "https://t.me/nick_lobanov",
+      "https://instagram.com/nick_lobanov"
+    ],
+    "knowsAbout": ["Сведение", "Мастеринг", "Музыкальное продюсирование", "Аранжировки", "Mixing", "Mastering", "Music Production", "Apple Digital Masters"],
+    "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "name": "Apple Digital Masters Approved Mastering Engineer",
+      "credentialCategory": "certification",
+      "url": "https://www.apple.com/apple-music/apple-digital-masters/",
+      "recognizedBy": {
+        "@type": "Organization",
+        "name": "Apple",
+        "url": "https://www.apple.com/"
+      }
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Москва",
+      "addressCountry": "RU"
+    }
   }
-  .hero-name {
-    font-size: clamp(56px, 16vw, 88px);
-    letter-spacing: -1px;
-    word-break: break-word;
-  }
-  .hero-sub {
-    font-size: 10px;
-    letter-spacing: 2px;
-    line-height: 2;
-  }
+  </script>
 
-  .services-grid { grid-template-columns: 1fr; }
-  .works { padding: 48px 20px; }
-  .works-grid { grid-template-columns: 1fr 1fr; }
-  .track-card { padding: 18px; }
-  .track-title { font-size: 13px; min-height: 34px; }
-  .track-artist { font-size: 10px; }
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.ico">
 
-  .about { padding: 48px 20px; }
-  .about-main { grid-template-columns: 1fr; gap: 40px; margin-bottom: 48px; }
-  .about-photo img { max-width: 400px; margin: 0 auto; }
+  <!-- Preconnect for critical resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://avatars.yandex.net">
+  <link rel="preconnect" href="https://i.scdn.co">
+  <!-- DNS prefetch for non-critical -->
+  <link rel="dns-prefetch" href="https://docs.google.com">
+  <link rel="dns-prefetch" href="https://mc.yandex.ru">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
-  .contacts { padding: 48px 20px; }
-  .contact-main {
-    font-size: 18px;
-    word-break: break-all;
-  }
-  .contact-links { flex-direction: column; gap: 12px; }
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
-  footer { padding: 20px; }
-  .modal-box { padding: 24px; }
-}
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-@media (max-width: 360px) {
-  .works-grid { grid-template-columns: 1fr; }
-  .track-card { padding: 22px; }
-}
+  <nav id="nav">
+    <a href="#" class="nav-logo">NICK LOBANOV</a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <a href="#works" class="nav-trigger">works</a>
+        <div class="dropdown-menu">
+          <a href="#works" data-filter="all">all</a>
+          <a href="#works" data-filter="mixing">mixing</a>
+          <a href="#works" data-filter="mastering">mastering</a>
+          <a href="#works" data-filter="production">production</a>
+          <a href="#works" data-filter="collaboration">collaboration</a>
+        </div>
+      </div>
+      <a href="#about">about</a>
+      <a href="#contacts">contacts</a>
+      <span class="lang-switch">
+        <button class="lang-btn active" data-lang="ru">RU</button>
+        <span class="lang-divider">/</span>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </span>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-label">// sound engineer</p>
+    <h1 class="hero-name">NICK<br>LOBANOV</h1>
+    <p class="hero-sub">
+      <span>mixing_</span>
+      <span>mastering_</span>
+      <span>production_</span>
+      <span>collaboration_</span>
+    </p>
+  </section>
+
+  <section class="services">
+    <div class="services-grid">
+      <div class="service-item">
+        <span class="service-num">01</span>
+        <h3 data-ru="Сведение" data-en="Mixing">Сведение</h3>
+        <p data-ru="Баланс, глубина и характер. Каждый элемент на своём месте — от суббаса до воздуха."
+           data-en="Balance, depth and character. Every element in its place — from sub-bass to air.">Баланс, глубина и характер. Каждый элемент на своём месте — от суббаса до воздуха.</p>
+      </div>
+      <div class="service-item">
+        <span class="service-num">02</span>
+        <h3 data-ru="Мастеринг" data-en="Mastering">Мастеринг</h3>
+        <p data-ru="Финальная обработка и подготовка под стриминги. Apple Digital Masters"
+           data-en="Final processing and preparation for streaming. Apple Digital Masters">Финальная обработка и подготовка под стриминги. Apple Digital Masters</p>
+      </div>
+      <div class="service-item">
+        <span class="service-num">03</span>
+        <h3 data-ru="Продакшн" data-en="Production">Продакшн</h3>
+        <p data-ru="От голоса и гитары до полноценного звукового полотна. Любой жанр."
+           data-en="From a vocal or a guitar to a complete sonic landscape. Any genre.">От голоса и гитары до полноценного звукового полотна. Любой жанр.</p>
+      </div>
+      <div class="service-item">
+        <span class="service-num">04</span>
+        <h3 data-ru="Коллаборации" data-en="Collaboration">Коллаборации</h3>
+        <p data-ru="Соавторство с артистами — от идеи до релиза."
+           data-en="Co-creating with artists — from initial idea to final release.">Соавторство с артистами — от идеи до релиза.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="works" id="works">
+    <div class="works-header">
+      <p class="section-label">// works</p>
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-filter="all">all</button>
+        <button class="filter-btn" data-filter="mixing">mixing</button>
+        <button class="filter-btn" data-filter="mastering">mastering</button>
+        <button class="filter-btn" data-filter="production">production</button>
+        <button class="filter-btn" data-filter="collaboration">collaboration</button>
+      </div>
+    </div>
+    <div class="works-grid" id="works-grid">
+      <div class="loading" data-ru="загружаем работы..." data-en="loading works...">загружаем работы...</div>
+    </div>
+    <div class="load-more-wrap">
+      <button class="load-more" id="load-more" data-ru="показать ещё" data-en="show more" style="display:none;">показать ещё</button>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-main">
+      <div class="about-photo">
+        <picture>
+          <source srcset="nick.webp" type="image/webp">
+          <img src="nick.jpg" alt="Nick Lobanov">
+        </picture>
+      </div>
+      <div class="about-text">
+        <p class="section-label">// about</p>
+        <div data-lang-block="ru">
+          <p>Ник Лобанов — микс-инженер и продюсер с опытом более 10 лет</p>
+          <p>Партнёр команды <a href="https://flowmasters.team/" target="_blank" class="inline-link">Flowmasters</a> — сообщества профессионалов, которые помогают музыкантам доводить треки до идеала</p>
+          <p>Работает на студии топ-класса в Москве с клиентами по всему миру</p>
+          <p>Официальный мастеринг-инженер, сертифицированный <a href="https://www.apple.com/apple-music/apple-digital-masters/" target="_blank" rel="noopener" class="inline-link">Apple Digital Masters</a></p>
+          <p>Соавтор и сопродюсер проекта <a href="https://www.instagram.com/laptoparty/" target="_blank" class="inline-link">laptop party</a> (Лондон, Великобритания)</p>
+          <p>Автор рубрики о новинках в мире музыкального продакшна на YouTube-канале <a href="https://youtu.be/UWE4rC1FKcc" target="_blank" class="inline-link">«Вокруг шум»</a></p>
+        </div>
+        <div data-lang-block="en" style="display:none;">
+          <p>Nick Lobanov — mixing engineer and music producer with over 10 years of experience</p>
+          <p>Partner of <a href="https://flowmasters.team/" target="_blank" class="inline-link">Flowmasters</a> — a team of music professionals helping artists bring their tracks to the highest standard</p>
+          <p>Works from a top-tier studio with clients worldwide</p>
+          <p><a href="https://www.apple.com/apple-music/apple-digital-masters/" target="_blank" rel="noopener" class="inline-link">Apple Digital Masters</a> Approved Mastering Engineer</p>
+          <p>Co-author and co-producer of <a href="https://www.instagram.com/laptoparty/" target="_blank" class="inline-link">laptop party</a> (London, UK)</p>
+        </div>
+      </div>
+    </div>
+    <div class="about-credits">
+      <div class="credits-block">
+        <p class="credits-label">// credits</p>
+        <p>T-Fest (feat. Feduk, Элджей, Скриптонит, Дора, Мумий Тролль, Баста), NЮ, The Neopolitans, Эрика Лундмоен, Сансара/Sansara, Ericka Janes, Сестренка, Aimori, Samaji, Brama, Парнишка, Краснознаменная дивизия имени моей бабушки, Иван Курочкин («Электрофорез») </p>
+      </div>
+      <div class="credits-block">
+        <p class="credits-label">// b2b</p>
+        <p>Gazgolder, Universal Music Group, Lamoda, Kinopoisk, FX Pro, Timberk</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contacts" id="contacts">
+    <p class="section-label">// contacts</p>
+    <a href="https://t.me/nick_lobanov" target="_blank" class="contact-main">@nick_lobanov</a>
+    <div class="contact-links">
+      <a href="https://t.me/nick_lobanov" target="_blank">telegram</a>
+      <a href="https://instagram.com/nick_lobanov" target="_blank">instagram</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2025 Nick Lobanov</span>
+  </footer>
+
+  <div id="modal" class="modal" style="display:none;">
+    <div class="modal-backdrop" onclick="closeModal()"></div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <p class="modal-artist" id="modal-artist"></p>
+          <p class="modal-title" id="modal-title"></p>
+        </div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-players" id="modal-players"></div>
+      <div class="modal-tags" id="modal-tags"></div>
+    </div>
+  </div>
+
+  <script defer src="script.js"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LS93HZ4N87"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LS93HZ4N87');
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+      (function(m,e,t,r,i,k,a){
+          m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109264972', 'ym');
+      ym(109264972, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109264972" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+</body>
+</html>
